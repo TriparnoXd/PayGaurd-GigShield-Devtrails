@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#c3f400",
+              "surface-container": "#f2e2ff",
+              "surface-container-highest": "#ead5ff",
+              "on-error-container": "#510017",
+              "outline": "#826e99",
+              "on-tertiary-fixed": "#360600",
+              "on-surface-variant": "#66537c",
+              "secondary-dim": "#435600",
+              "surface": "#fdf3ff",
+              "on-secondary-fixed": "#354500",
+              "on-primary": "#f7f0ff",
+              "surface-bright": "#fdf3ff",
+              "tertiary-container": "#ff9479",
+              "on-primary-container": "#290071",
+              "on-background": "#38274d",
+              "inverse-surface": "#16052a",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-dim": "#9a2100",
+              "error-dim": "#a70138",
+              "outline-variant": "#baa4d2",
+              "on-error": "#ffefef",
+              "error": "#b41340",
+              "on-tertiary-fixed-variant": "#721600",
+              "tertiary-fixed": "#ff9479",
+              "surface-container-low": "#f9edff",
+              "on-secondary": "#e1ff88",
+              "secondary": "#4e6300",
+              "on-tertiary-container": "#621200",
+              "primary-fixed-dim": "#9e7dff",
+              "surface-tint": "#681df7",
+              "primary-container": "#aa8fff",
+              "on-tertiary": "#ffefec",
+              "primary-fixed": "#aa8fff",
+              "on-secondary-container": "#455900",
+              "primary": "#681df7",
+              "tertiary": "#af2700",
+              "on-primary-fixed-variant": "#330089",
+              "on-secondary-fixed-variant": "#4e6300",
+              "primary-dim": "#5b00e5",
+              "on-primary-fixed": "#000000",
+              "inverse-primary": "#9b7aff",
+              "error-container": "#f74b6d",
+              "secondary-container": "#c3f400",
+              "surface-dim": "#e4caff",
+              "surface-container-high": "#eedbff",
+              "secondary-fixed-dim": "#b7e500",
+              "tertiary-fixed-dim": "#ff7d5c",
+              "background": "#fdf3ff",
+              "surface-variant": "#ead5ff",
+              "on-surface": "#38274d",
+              "inverse-on-surface": "#aa94c1"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-pill {
+            background: rgba(104, 29, 247, 0.1);
+            backdrop-filter: blur(20px);
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #681df7 0%, #5b00e5 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fdf3ff] dark:bg-[#1a0b2e] shadow-[0_8px_24px_rgba(56,39,77,0.06)] flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a young delivery partner wearing a purple uniform with a friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACcZErJz82p8BaZeqdqTCgD_FEeMuk2OB8crs0Aaf9x2ui2VC4o5REkrJ0rbEF7FVDspp_fJEN0-GqJpGxOmvut6vh8Q0fwmSmHvcptg6XC1YcMbfvZaFCh9Ccyrp11Bu2U12J55B6P8UAhguv2CAxQsYfebaROLYMx-pm21pTCWAF4VeMYix8MMuGYaGtzHj-9v_PN2a4J4KpNL1B4GlAb4pzFhnW5bmFX6Jr1lKC_cmv50yi8EjHdIka9YpCXkIwXc-ljtmjDhsg"/>
+</div>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-2xl tracking-tight text-[#681df7] dark:text-[#a67cff]">GigShield</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#681df7] dark:text-[#a67cff]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</nav>
+<!-- Shield Indicator (Custom Component) -->
+<div class="pt-24 px-6 flex justify-center">
+<div class="glass-pill px-6 py-2 rounded-full border border-outline-variant/15 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-secondary-fixed">Protection Active</span>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="mt-8 px-6 max-w-lg mx-auto">
+<!-- Editorial Header -->
+<header class="mb-10 text-left relative">
+<h1 class="text-[3.5rem] leading-[0.95] font-headline font-extrabold tracking-tighter text-primary mb-4">
+                Choose Your <br/><span class="text-on-surface">Armor.</span>
+</h1>
+<p class="body-lg text-on-surface-variant max-w-[80%]">
+                High-velocity coverage built for the Zepto delivery ecosystem. Pick the shield that matches your hustle.
+            </p>
+</header>
+<!-- Plans Comparison - Asymmetric Bento Grid -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Zepto Pro Max (High-Impact Card) -->
+<section class="kinetic-gradient rounded-lg p-8 relative overflow-hidden shadow-2xl">
+<!-- Decorative element -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary-fixed/10 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-secondary-fixed block mb-2">Elite Tier</span>
+<h2 class="text-4xl font-headline font-black italic text-on-primary tracking-tight">Zepto Pro Max</h2>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label font-bold text-xs">BEST VALUE</div>
+</div>
+<ul class="space-y-6 mb-12">
+<li class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed">water_drop</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-primary">100% Rain Protection</p>
+<p class="text-sm text-on-primary/70">Full rain-fee protection on every drop.</p>
+</div>
+</li>
+<li class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed">air</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-primary">AQI Bonus Protection</p>
+<p class="text-sm text-on-primary/70">Automatic payouts when AQI exceeds 250.</p>
+</div>
+</li>
+<li class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed">storefront</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-primary">Zepto Hub Delay Coverage</p>
+<p class="text-sm text-on-primary/70">Earnings secured if picking up takes &gt;7 mins.</p>
+</div>
+</li>
+</ul>
+<button class="w-full py-5 bg-secondary-container text-on-secondary-container font-headline font-extrabold text-lg rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                        ACTIVATE PRO MAX
+                    </button>
+</div>
+</section>
+<!-- Rapid Response Shield -->
+<section class="bg-surface-container rounded-lg p-8 border border-outline-variant/10 shadow-sm">
+<div class="mb-8">
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-primary block mb-2">Essential Tier</span>
+<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight">Rapid Response Shield</h2>
+</div>
+<ul class="space-y-6 mb-10">
+<li class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Emergency Cashless</p>
+<p class="text-sm text-on-surface-variant">Instant hospital admission support.</p>
+</div>
+</li>
+<li class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Vehicle Breakdown</p>
+<p class="text-sm text-on-surface-variant">On-road assistance within 30 mins.</p>
+</div>
+</li>
+</ul>
+<button class="w-full py-4 bg-surface-container-highest text-primary font-headline font-bold rounded-xl hover:bg-primary/5 transition-colors border border-primary/20">
+                    Switch to Rapid Response
+                </button>
+</section>
+</div>
+<!-- Detail Meta (Kinetic Anchor Style) -->
+<div class="mt-12 ml-4 relative border-l-2 border-primary-container pl-6 py-4">
+<h3 class="font-headline font-bold text-primary text-xl mb-2">Did you know?</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                94% of Zepto partners on the <span class="font-bold text-primary">Pro Max</span> plan maintain higher reliability scores during peak monsoon seasons.
+            </p>
+</div>
+<!-- Footer Spacer -->
+<div class="h-24"></div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-[3rem] z-50 pb-safe bg-[#fdf3ff]/80 dark:bg-[#1a0b2e]/80 backdrop-blur-xl shadow-[0_-8px_24px_rgba(56,39,77,0.06)]">
+<div class="flex justify-around items-center w-full px-4 py-3">
+<a class="flex flex-col items-center justify-center text-[#38274d] dark:text-[#baa4d2] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#38274d] dark:text-[#baa4d2] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">Earnings</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#ead5ff] dark:bg-[#681df7] text-[#681df7] dark:text-[#f7f0ff] rounded-full px-6 py-2 active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest mt-1">My Shield</span>
+</a>
+</div>
+</nav>
+</body></html>

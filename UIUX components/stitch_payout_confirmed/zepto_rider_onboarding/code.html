@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#c3f400",
+              "surface-container": "#f2e2ff",
+              "surface-container-highest": "#ead5ff",
+              "on-error-container": "#510017",
+              "outline": "#826e99",
+              "on-tertiary-fixed": "#360600",
+              "on-surface-variant": "#66537c",
+              "secondary-dim": "#435600",
+              "surface": "#fdf3ff",
+              "on-secondary-fixed": "#354500",
+              "on-primary": "#f7f0ff",
+              "surface-bright": "#fdf3ff",
+              "tertiary-container": "#ff9479",
+              "on-primary-container": "#290071",
+              "on-background": "#38274d",
+              "inverse-surface": "#16052a",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-dim": "#9a2100",
+              "error-dim": "#a70138",
+              "outline-variant": "#baa4d2",
+              "on-error": "#ffefef",
+              "error": "#b41340",
+              "on-tertiary-fixed-variant": "#721600",
+              "tertiary-fixed": "#ff9479",
+              "surface-container-low": "#f9edff",
+              "on-secondary": "#e1ff88",
+              "secondary": "#4e6300",
+              "on-tertiary-container": "#621200",
+              "primary-fixed-dim": "#9e7dff",
+              "surface-tint": "#681df7",
+              "primary-container": "#aa8fff",
+              "on-tertiary": "#ffefec",
+              "primary-fixed": "#aa8fff",
+              "on-secondary-container": "#455900",
+              "primary": "#681df7",
+              "tertiary": "#af2700",
+              "on-primary-fixed-variant": "#330089",
+              "on-secondary-fixed-variant": "#4e6300",
+              "primary-dim": "#5b00e5",
+              "on-primary-fixed": "#000000",
+              "inverse-primary": "#9b7aff",
+              "error-container": "#f74b6d",
+              "secondary-container": "#c3f400",
+              "surface-dim": "#e4caff",
+              "surface-container-high": "#eedbff",
+              "secondary-fixed-dim": "#b7e500",
+              "tertiary-fixed-dim": "#ff7d5c",
+              "background": "#fdf3ff",
+              "surface-variant": "#ead5ff",
+              "on-surface": "#38274d",
+              "inverse-on-surface": "#aa94c1"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-effect {
+            background: rgba(104, 29, 247, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .kinetic-mask {
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col items-center overflow-x-hidden">
+<!-- Hero Section with Masked Illustration -->
+<header class="relative w-full max-w-md h-[397px] flex flex-col justify-end overflow-hidden">
+<div class="absolute inset-0 z-0 kinetic-mask">
+<img class="w-full h-full object-cover" data-alt="Modern delivery rider wearing professional gear on a purple motorcycle cruising through a blurred city street with vibrant neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhAQj-PM590ejFa8UHRkF-cto9Dtk-OZjKHfwKWI51B59yFlVJJYq4AzwzOImt787hXGhgkp8jBtnbUQzrzjvJn1U-72ViyLthKXR8n4I2KHET7gug-ch6_i5XUcNHdx5lXsM5fbXBesGpiCWAwOSzpMulpht2A-h4oxIIoHITXx9eS2DZZppga3TXd0IHMNjNbTzN0xcBSx8SInYWF_pd7hvd7LVU0h5aiFKMMi19Z636oQN0yGi9VvxSzYC7w4-iXknmzGzmaV1-"/>
+</div>
+<!-- Brand Floating Shield -->
+<div class="absolute top-8 left-6 z-20">
+<div class="glass-effect px-4 py-2 rounded-full border border-outline-variant/15 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-headline font-bold text-on-primary tracking-tight">GigShield</span>
+</div>
+</div>
+<!-- Typography Anchor -->
+<div class="relative z-10 px-8 pb-8">
+<h1 class="font-headline text-[3.5rem] font-extrabold leading-[1.1] text-on-background tracking-tighter">
+                Fuel Your <br/><span class="text-primary italic">Momentum.</span>
+</h1>
+<p class="font-body text-on-surface-variant mt-4 max-w-[80%] leading-relaxed">
+                Premium insurance coverage tailored for the velocity of Zepto's delivery network.
+            </p>
+</div>
+</header>
+<!-- Onboarding Form Section -->
+<main class="w-full max-w-md px-8 py-4 flex-1">
+<div class="space-y-6">
+<!-- Input Cluster: Mobile -->
+<div class="group">
+<label class="font-label text-[11px] font-bold uppercase tracking-widest text-outline ml-4 mb-2 block">
+                    Mobile Number
+                </label>
+<div class="relative flex items-center bg-surface-container-low rounded-lg p-1 transition-all duration-300 focus-within:ring-4 focus-within:ring-primary/10 focus-within:bg-surface-container-highest">
+<div class="pl-4 pr-2 text-on-surface-variant font-bold border-r border-outline-variant/30">+91</div>
+<input class="w-full bg-transparent border-none focus:ring-0 font-headline font-semibold text-lg py-3 px-4 placeholder:text-outline-variant/60" placeholder="98765 43210" type="tel"/>
+</div>
+</div>
+<!-- Input Cluster: Rider ID -->
+<div class="group">
+<label class="font-label text-[11px] font-bold uppercase tracking-widest text-outline ml-4 mb-2 block">
+                    Zepto Rider ID
+                </label>
+<div class="relative flex items-center bg-surface-container-low rounded-lg p-1 transition-all duration-300 focus-within:ring-4 focus-within:ring-primary/10 focus-within:bg-surface-container-highest">
+<span class="material-symbols-outlined ml-4 text-primary opacity-60">badge</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-headline font-semibold text-lg py-3 px-4 placeholder:text-outline-variant/60" placeholder="ZPT-XXXXX" type="text"/>
+</div>
+</div>
+<!-- Bento Selection: Operating Hub -->
+<div>
+<label class="font-label text-[11px] font-bold uppercase tracking-widest text-outline ml-4 mb-3 block">
+                    Operating Hub
+                </label>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-highest p-4 rounded-md text-left flex flex-col justify-between h-24 border border-primary/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-headline font-bold text-sm">South Delhi</span>
+</button>
+<button class="bg-surface-container-low p-4 rounded-md text-left flex flex-col justify-between h-24 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline">location_on</span>
+<span class="font-headline font-bold text-sm text-on-surface-variant">North Mumbai</span>
+</button>
+<button class="bg-surface-container-low p-4 rounded-md text-left flex flex-col justify-between h-24 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline">location_on</span>
+<span class="font-headline font-bold text-sm text-on-surface-variant">East Bangalore</span>
+</button>
+<button class="bg-surface-container-low p-4 rounded-md text-left flex flex-col justify-between h-24 hover:bg-surface-container transition-colors items-center justify-center border-2 border-dashed border-outline-variant/30">
+<span class="font-headline font-bold text-xs text-outline text-center">Other<br/>Hubs</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sticky Kinetic Trigger -->
+<div class="mt-12 mb-8">
+<button class="w-full bg-gradient-to-br from-primary to-primary-dim text-on-primary font-headline font-bold py-6 rounded-xl shadow-[0_24px_48px_-12px_rgba(104,29,247,0.35)] flex items-center justify-center gap-3 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">shield</span>
+<span class="text-lg">Secure My Income</span>
+</button>
+<p class="text-center text-[10px] text-outline mt-6 font-medium leading-relaxed">
+                By tapping, you agree to our <span class="text-primary underline">Privacy Policy</span> and <span class="text-primary underline">Insurance Terms</span>. 
+                GigShield is a registered partner of Zepto Logistics.
+            </p>
+</div>
+</main>
+<!-- Ambient Footer Detail -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary-fixed to-primary opacity-20"></div>
+</body></html>

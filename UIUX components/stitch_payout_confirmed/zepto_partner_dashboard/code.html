@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>GigShield | Zepto Partner Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#c3f400",
+              "surface-container": "#f2e2ff",
+              "surface-container-highest": "#ead5ff",
+              "on-error-container": "#510017",
+              "outline": "#826e99",
+              "on-tertiary-fixed": "#360600",
+              "on-surface-variant": "#66537c",
+              "secondary-dim": "#435600",
+              "surface": "#fdf3ff",
+              "on-secondary-fixed": "#354500",
+              "on-primary": "#f7f0ff",
+              "surface-bright": "#fdf3ff",
+              "tertiary-container": "#ff9479",
+              "on-primary-container": "#290071",
+              "on-background": "#38274d",
+              "inverse-surface": "#16052a",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-dim": "#9a2100",
+              "error-dim": "#a70138",
+              "outline-variant": "#baa4d2",
+              "on-error": "#ffefef",
+              "error": "#b41340",
+              "on-tertiary-fixed-variant": "#721600",
+              "tertiary-fixed": "#ff9479",
+              "surface-container-low": "#f9edff",
+              "on-secondary": "#e1ff88",
+              "secondary": "#4e6300",
+              "on-tertiary-container": "#621200",
+              "primary-fixed-dim": "#9e7dff",
+              "surface-tint": "#681df7",
+              "primary-container": "#aa8fff",
+              "on-tertiary": "#ffefec",
+              "primary-fixed": "#aa8fff",
+              "on-secondary-container": "#455900",
+              "primary": "#681df7",
+              "tertiary": "#af2700",
+              "on-primary-fixed-variant": "#330089",
+              "on-secondary-fixed-variant": "#4e6300",
+              "primary-dim": "#5b00e5",
+              "on-primary-fixed": "#000000",
+              "inverse-primary": "#9b7aff",
+              "error-container": "#f74b6d",
+              "secondary-container": "#c3f400",
+              "surface-dim": "#e4caff",
+              "surface-container-high": "#eedbff",
+              "secondary-fixed-dim": "#b7e500",
+              "tertiary-fixed-dim": "#ff7d5c",
+              "background": "#fdf3ff",
+              "surface-variant": "#ead5ff",
+              "on-surface": "#38274d",
+              "inverse-on-surface": "#aa94c1"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Manrope', sans-serif; }
+      .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .kinetic-gradient {
+        background: linear-gradient(135deg, #681df7 0%, #5b00e5 100%);
+      }
+      .glass-card {
+        background: rgba(104, 29, 247, 0.06);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fdf3ff] dark:bg-[#1a0b2e] shadow-[0_8px_24px_rgba(56,39,77,0.06)]">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border-2 border-primary/20">
+<img alt="Partner Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a smiling delivery partner wearing a purple helmet and uniform with soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAney5hRxj4oj4N-gClHtnhc2cBnAXR5Tw3dB1Z-fPjtIReWltAA2WxnVBTNFaq3r4oPawbHJsNiMi_grmn6aZwo31QQ-ZX7y8gFuwIxaZ_frskqgBHzXldgMVkTUZ_AX7U-Z9pT3XaLDYlFkDa8-t2XB2-G8Vvwf6JBWpHGvEnSSGp9ySNyy3ruiorrjOX-xK-VpBLZagn-grTsO6kiLyGHTAkguwh9ED5dBs6LP5h3BE8i085pherGtcfyos1TA-45DeumGsGpdC1"/>
+</div>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-2xl tracking-tight text-[#681df7] dark:text-[#a67cff]">GigShield</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center bg-secondary-container px-3 py-1 rounded-full gap-1.5">
+<span class="material-symbols-outlined text-on-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-widest text-on-secondary-container">Secured Delivery</span>
+</div>
+</div>
+</div>
+<div class="bg-[#f2e2ff] dark:bg-[#2a1b3d] h-[2px] w-full"></div>
+</header>
+<main class="pt-24 px-6 max-w-lg mx-auto space-y-6">
+<!-- Status Indicator & Shield -->
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<p class="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-outline">Partner Status</p>
+<h1 class="font-headline text-3xl font-extrabold text-on-surface">Go Online</h1>
+</div>
+<button class="w-16 h-16 rounded-full kinetic-gradient flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-primary text-3xl" style="font-variation-settings: 'FILL' 1;">power_settings_new</span>
+</button>
+</div>
+<!-- Shield Component -->
+<div class="glass-card rounded-lg p-5 flex items-center justify-between border border-primary/10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-on-surface text-lg">Active Zepto Protection</h3>
+<p class="text-xs text-on-surface-variant font-medium">Full accident &amp; health coverage active</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">chevron_right</span>
+</div>
+</section>
+<!-- Weather Alerts - Bento Style -->
+<section class="grid grid-cols-1 gap-4">
+<div class="bg-error-container/10 p-5 rounded-lg flex items-start gap-4 border-l-4 border-error">
+<span class="material-symbols-outlined text-error mt-1" style="font-variation-settings: 'FILL' 1;">thunderstorm</span>
+<div>
+<h4 class="font-headline font-bold text-on-surface tracking-tight">Heavy Rain Alert: Koramangala Hub</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Expected in 15 mins. Protective gear recommended. 1.5x rain surge active.</p>
+</div>
+</div>
+</section>
+<!-- Earnings Trend -->
+<section class="bg-surface-container-low rounded-lg p-6 space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline font-bold text-xl">Earnings Trend</h3>
+<span class="font-label text-[10px] font-bold bg-surface-container-highest px-3 py-1 rounded-full text-primary">WEEKLY</span>
+</div>
+<!-- Visualization -->
+<div class="h-32 flex items-end justify-between gap-2 pt-4">
+<div class="flex-1 bg-surface-container-highest rounded-t-md h-1/2"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-md h-2/3"></div>
+<div class="flex-1 kinetic-gradient rounded-t-md h-[90%] shadow-md shadow-primary/20"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-md h-3/4"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-md h-1/2"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-md h-3/5"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-md h-5/6"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-outline uppercase tracking-widest px-1">
+<span>Mon</span><span>Tue</span><span class="text-primary">Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+<div class="pt-4 mt-4 border-t border-outline-variant/30 flex justify-between items-center">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-outline">Today's Payout</p>
+<p class="font-headline text-2xl font-black text-on-surface">₹1,240.50</p>
+</div>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-full font-headline font-bold text-sm active:scale-95 transition-transform">
+                    Withdraw
+                </button>
+</div>
+</section>
+<!-- Delivery Stats - Asymmetric Grid -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container rounded-lg p-5 flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-primary text-3xl">shopping_cart</span>
+<div>
+<p class="font-headline text-3xl font-extrabold text-on-surface">14</p>
+<p class="text-xs font-bold text-outline-variant uppercase tracking-widest">Deliveries Today</p>
+</div>
+</div>
+<div class="bg-secondary-container p-5 rounded-lg flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<div>
+<p class="font-headline text-3xl font-extrabold text-on-secondary-container">4.92</p>
+<p class="text-xs font-bold text-on-secondary-container/60 uppercase tracking-widest">Partner Rating</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-[3rem] z-50 pb-safe bg-[#fdf3ff]/80 dark:bg-[#1a0b2e]/80 backdrop-blur-xl shadow-[0_-8px_24px_rgba(56,39,77,0.06)]">
+<div class="flex justify-around items-center w-full px-4 py-3">
+<a class="flex flex-col items-center justify-center bg-[#ead5ff] dark:bg-[#681df7] text-[#681df7] dark:text-[#f7f0ff] rounded-full px-6 py-2 active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#38274d] dark:text-[#baa4d2] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest">Earnings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#38274d] dark:text-[#baa4d2] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-widest">My Shield</span>
+</a>
+</div>
+</nav>
+</body></html>
