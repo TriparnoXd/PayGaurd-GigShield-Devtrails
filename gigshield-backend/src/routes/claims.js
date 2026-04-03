@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const crypto = require('crypto');
 const supabase = require('../config/supabase');
 const auth = require('../middleware/auth');
 const Razorpay = require('razorpay');
@@ -14,7 +15,12 @@ const razorpay = new Razorpay({
 // Internal auth middleware for trigger endpoints
 const internalAuth = (req, res, next) => {
   const internalKey = req.headers['x-internal-key'];
-  if (internalKey !== process.env.INTERNAL_KEY) {
+  if (!internalKey || !process.env.INTERNAL_KEY) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  const keyBuffer = Buffer.from(internalKey, 'utf8');
+  const expectedBuffer = Buffer.from(process.env.INTERNAL_KEY, 'utf8');
+  if (!crypto.timingSafeEqual(keyBuffer, expectedBuffer)) {
     return res.status(403).json({ error: 'Forbidden' });
   }
   next();
@@ -96,7 +102,7 @@ router.post('/initiate', internalAuth, async (req, res, next) => {
         hourly_rate: hourlyRate,
         fraud_score: fraudScore,
         status,
-        upi_id: `${worker_id.substring(0, 8)}@upi`
+        upi_id: `${crypto.createHash('sha256').update(worker_id + Date.now()).digest('hex').substring(0, 8)}@gigshield`
       })
       .select()
       .single();
@@ -249,8 +255,8 @@ router.post('/:id/settle', internalAuth, async (req, res, next) => {
     let razorpayId = null;
     try {
       const payout = await razorpay.payouts.create({
-        account_number: '2323230062925652', // Dummy account
-        fund_account_id: 'fa_' + claim.worker_id.substring(0, 10),
+        account_number: process.env.RAZORPAY_FUND_ACCOUNT_NUMBER,
+        fund_account_id: 'fa_' + crypto.createHash('sha256').update(claim.worker_id).digest('hex').substring(0, 12),
         amount: Math.round(payoutAmount * 100), // in paise
         currency: 'INR',
         mode: 'UPI',
