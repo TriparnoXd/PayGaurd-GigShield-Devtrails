@@ -2,6 +2,11 @@ const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const router = express.Router();
 
+const isValidPhoneNumber = (phone) => {
+  const e164Regex = /^\+91[6-9]\d{9}$/;
+  return e164Regex.test(phone);
+};
+
 // Create anon client for auth operations
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -15,6 +20,10 @@ router.post('/send-otp', async (req, res, next) => {
 
     if (!phone) {
       return res.status(400).json({ error: 'Phone number is required' });
+    }
+
+    if (!isValidPhoneNumber(phone)) {
+      return res.status(400).json({ error: 'Invalid phone number format. Must be in E.164 format (+91XXXXXXXXXX)' });
     }
 
     const { error } = await supabase.auth.signInWithOtp({ phone });
@@ -36,6 +45,10 @@ router.post('/verify-otp', async (req, res, next) => {
 
     if (!phone || !token) {
       return res.status(400).json({ error: 'Phone and token are required' });
+    }
+
+    if (!isValidPhoneNumber(phone)) {
+      return res.status(400).json({ error: 'Invalid phone number format. Must be in E.164 format (+91XXXXXXXXXX)' });
     }
 
     const { data, error } = await supabase.auth.verifyOtp({
