@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const supabase = require('../config/supabase');
 const auth = require('../middleware/auth');
+const { getPremiumMultiplier } = require('../services/premiumService');
 
 // UUID validation regex
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -39,19 +39,8 @@ router.post('/create', auth, async (req, res, next) => {
 
     const planConfig = PLAN_CONFIG[plan];
 
-    // Get multiplier from ML service with timeout
-    let multiplier = 1.0;
-    try {
-      const mlRes = await axios.post(
-        `${process.env.ML_SERVICE_URL}/ml/premium/calculate`,
-        { worker_id, plan },
-        { timeout: 5000 } // 5 second timeout
-      );
-      multiplier = mlRes.data.multiplier || 1.0;
-    } catch (err) {
-      console.log('[ML SERVICE] Unavailable or timeout, using default multiplier 1.0');
-      multiplier = 1.0;
-    }
+    // Get multiplier from ML service — throws if unavailable
+    const multiplier = await getPremiumMultiplier(worker_id, plan);
 
     const finalPremium = Math.round(planConfig.base * multiplier);
 

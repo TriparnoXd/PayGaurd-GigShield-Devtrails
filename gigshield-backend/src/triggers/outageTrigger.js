@@ -14,6 +14,9 @@ const ZONES = [
 
 const OUTAGE_DURATION_THRESHOLD = 60; // minutes
 
+// Use env var for mock platform URL, fallback to localhost for local dev
+const MOCK_PLATFORM_URL = process.env.MOCK_PLATFORM_URL || 'http://localhost:3001/mock/platform-status';
+
 // Lock to prevent overlapping executions
 let isRunning = false;
 
@@ -30,7 +33,7 @@ async function checkOutage() {
     for (const zone of ZONES) {
       try {
         // Call mock platform status API
-        const res = await axios.get('http://localhost:3001/mock/platform-status', {
+        const res = await axios.get(MOCK_PLATFORM_URL, {
           timeout: 5000
         });
 

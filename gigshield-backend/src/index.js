@@ -9,6 +9,7 @@ const policyRoutes  = require('./routes/policies');
 const claimRoutes   = require('./routes/claims');
 const triggerRoutes = require('./routes/triggers');
 const errorHandler  = require('./middleware/errorHandler');
+const { checkMLHealth } = require('./services/mlHealthCheck');
 
 // Start trigger cron services
 require('./triggers/rainfallTrigger');
@@ -51,6 +52,20 @@ app.use('/policies', policyRoutes);
 app.use('/claims',   claimRoutes);
 app.use('/triggers', triggerRoutes);
 
+// ML health check endpoint
+app.get('/ml/health', async (req, res) => {
+  const mlHealth = await checkMLHealth();
+  if (mlHealth.healthy) {
+    res.json({ status: 'healthy', ml: mlHealth.details });
+  } else {
+    res.status(503).json({
+      status: 'unhealthy',
+      ml: mlHealth.details,
+      message: 'ML service is not available',
+    });
+  }
+});
+
 // Enhanced health check with dependency verification
 app.get('/health', async (req, res) => {
   const startTime = Date.now();
@@ -68,10 +83,10 @@ app.get('/health', async (req, res) => {
     // Check Supabase connection
     const supabase = require('./config/supabase');
     const { error: dbError } = await supabase.from('workers').select('count').limit(1);
-    healthCheck.dependencies.database = dbError ? 
-      { status: 'error', error: dbError.message } : 
+    healthCheck.dependencies.database = dbError ?
+      { status: 'error', error: dbError.message } :
       { status: 'connected' };
-    
+
     // Check Redis connection
     const redis = require('./config/redis');
     let redisStatus = 'disconnected';
@@ -83,10 +98,17 @@ app.get('/health', async (req, res) => {
     }
     healthCheck.dependencies.redis = { status: redisStatus };
 
+    // Check ML service
+    const mlHealth = await checkMLHealth();
+    healthCheck.dependencies.ml_service = mlHealth.healthy
+      ? { status: 'healthy' }
+      : { status: 'unhealthy', detail: mlHealth.details };
+
     // Determine overall status
     const dbOk = healthCheck.dependencies.database.status === 'connected';
     const redisOk = ['connected', 'mock'].includes(healthCheck.dependencies.redis.status);
-    
+    const mlOk = healthCheck.dependencies.ml_service.status === 'healthy';
+
     if (!dbOk || !redisOk) {
       healthCheck.status = 'degraded';
     }

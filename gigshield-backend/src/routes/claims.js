@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const supabase = require('../config/supabase');
 const auth = require('../middleware/auth');
 const Razorpay = require('razorpay');
@@ -78,19 +77,8 @@ router.post('/initiate', internalAuth, async (req, res, next) => {
       throw workerError;
     }
 
-    // Get fraud score from ML service with timeout
-    let fraudScore = 0;
-    try {
-      const fraudRes = await axios.post(
-        `${process.env.ML_SERVICE_URL}/ml/fraud/score`,
-        { worker_id, trigger_type, zone },
-        { timeout: 5000 } // 5 second timeout
-      );
-      fraudScore = fraudRes.data.fraud_score || 0;
-    } catch (err) {
-      console.log('[ML SERVICE] Fraud service unavailable or timeout, defaulting to 0');
-      fraudScore = 0;
-    }
+    // Get fraud score from ML service — throws if unavailable
+    const fraudScore = await getFraudScore(worker_id, trigger_type, zone);
 
     // Calculate hourly rate with validation
     if (!worker.avg_weekly_earn || !worker.avg_active_hrs || worker.avg_active_hrs <= 0) {
