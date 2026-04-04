@@ -1,28 +1,49 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import OnboardingScreen from './src/screens/OnboardingScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
 
-const Stack = createStackNavigator();
+import { colors } from './src/theme';
+import {
+  OnboardingScreen,
+  OTPVerificationScreen,
+  DashboardScreen,
+  ProtectionPlansScreen,
+  EarningsScreen,
+  ClaimProgressScreen,
+  PayoutConfirmationScreen,
+} from './src/screens';
+import { RootStackParamList } from './src/navigation/types';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const initialRouteName = process.env.EXPO_PUBLIC_INITIAL_ROUTE || 'Onboarding';
-
   return (
-    <NavigationContainer onError={(error) => {
-      console.warn('Navigation error:', error);
-      // Could show fallback UI or log to analytics
-    }}>
+    <NavigationContainer>
+      <StatusBar style="dark" />
       <Stack.Navigator
-        initialRouteName={initialRouteName}
+        initialRouteName="Onboarding"
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: '#fff' },
+          contentStyle: { backgroundColor: colors.surface },
         }}
       >
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="OTPVerification" component={() => null} />
+        <Stack.Screen name="OTPVerification" component={OTPVerificationScreen} />
+        <Stack.Screen name="ProtectionPlans" component={ProtectionPlansScreen} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Earnings" component={EarningsScreen} />
+        <Stack.Screen name="ClaimProgress" component={ClaimProgressScreen} />
+        <Stack.Screen name="PayoutConfirmation" component={PayoutConfirmationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.surface,
+  },
+});

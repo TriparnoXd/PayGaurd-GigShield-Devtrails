@@ -1,159 +1,312 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+import { colors, typography, spacing, borderRadius, shadows } from '../theme';
+import { Input, Button } from '../components';
+import { useUserStore } from '../store';
 
-const OnboardingScreen = () => {
-  const navigation = useNavigation();
+interface HubOption {
+  id: string;
+  name: string;
+  selected: boolean;
+}
+
+export const OnboardingScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [riderId, setRiderId] = useState('');
-  const [selectedHub, setSelectedHub] = useState(null);
-  const [user, setUser] = useState(null);
+  const [selectedHub, setSelectedHub] = useState<string>('south-delhi');
 
-  const [hubs, setHubs] = useState([
-    { id: 1, name: 'Hub A', selected: false },
-    { id: 2, name: 'Hub B', selected: false },
-    { id: 3, name: 'Hub C', selected: false },
-  ]);
+  const setUser = useUserStore((state) => state.setUser);
 
-  const handleHubSelect = (hubId) => {
-    setHubs(hubs.map(hub => ({ ...hub, selected: hub.id === hubId })));
+  const hubs: HubOption[] = [
+    { id: 'south-delhi', name: 'South Delhi', selected: selectedHub === 'south-delhi' },
+    { id: 'north-mumbai', name: 'North Mumbai', selected: selectedHub === 'north-mumbai' },
+    { id: 'east-bangalore', name: 'East Bangalore', selected: selectedHub === 'east-bangalore' },
+    { id: 'other', name: 'Other Hubs', selected: selectedHub === 'other' },
+  ];
+
+  const handleHubSelect = (hubId: string) => {
     setSelectedHub(hubId);
   };
 
   const handleSecureIncome = () => {
-    // Validate phone number
-    const phoneNumberObj = parsePhoneNumberFromString(mobileNumber, 'IN');
-    if (!phoneNumberObj || !phoneNumberObj.isValid()) {
-      // Show error to user
-      Alert.alert('Error', 'Please enter a valid Indian phone number');
-      return;
-    }
-
-    // Only proceed with verified data from backend in real implementation
-    // For now, store minimal data and let backend handle verification
     setUser({
-      phoneNumber: phoneNumberObj.formatInternational(), // Properly formatted
-      riderId: riderId.trim(), // Basic sanitization
+      phoneNumber: `+91 ${mobileNumber}`,
+      riderId,
       hub: selectedHub,
-      isVerified: false, // Will be updated after OTP verification
+      isVerified: false,
     });
-
-    navigation.navigate('OTPVerification', {
-      phoneNumber: phoneNumberObj.formatInternational()
-    });
+    navigation.navigate('OTPVerification', { phoneNumber: `+91 ${mobileNumber}` });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Onboarding</Text>
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Mobile Number"
-        value={mobileNumber}
-        onChangeText={setMobileNumber}
-        keyboardType="phone-pad"
-      />
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Rider ID"
-        value={riderId}
-        onChangeText={setRiderId}
-      />
-      
-      <Text style={styles.subtitle}>Select Hub</Text>
-      {hubs.map((hub) => (
-        <TouchableOpacity
-          key={hub.id}
-          style={[
-            styles.hubButton,
-            hub.selected && styles.hubButtonSelected,
-          ]}
-          onPress={() => handleHubSelect(hub.id)}
-          activeOpacity={0.7}
-          accessibilityRole="radio"
-          accessibilityChecked={hub.selected === true}
-          accessibilityLabel={
-            `${hub.name}, ${hub.selected ? 'selected' : 'not selected'}`
-          }
-        >
-          <Text>{hub.name}</Text>
-          {hub.selected && (
-            <View style={styles.checkMark}>
-              <Text style={styles.checkMarkIcon}>✓</Text>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor={colors.surface} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Hero Section */}
+        <View style={styles.hero}>
+          <View style={styles.heroGradient} />
+
+          {/* Brand Shield */}
+          <View style={styles.brandShield}>
+            <View style={styles.shieldContent}>
+              <Text style={styles.shieldIcon}>🛡️</Text>
+              <Text style={styles.brandText}>GigShield</Text>
             </View>
-          )}
-        </TouchableOpacity>
-      ))}
-      
-      <TouchableOpacity style={styles.button} onPress={handleSecureIncome}>
-        <Text style={styles.buttonText}>Secure My Income</Text>
-      </TouchableOpacity>
-    </View>
+          </View>
+
+          {/* Hero Text */}
+          <View style={styles.heroText}>
+            <Text style={styles.heroTitle}>
+              Fuel Your{'\n'}
+              <Text style={[styles.heroTitle, { fontStyle: 'italic', color: colors.primary }]}>
+                Momentum.
+              </Text>
+            </Text>
+            <Text style={styles.heroSubtitle}>
+              Premium insurance coverage tailored for the velocity of Zepto's delivery network.
+            </Text>
+          </View>
+        </View>
+
+        {/* Form Section */}
+        <View style={styles.form}>
+          {/* Mobile Number Input */}
+          <Input
+            label="Mobile Number"
+            placeholder="98765 43210"
+            value={mobileNumber}
+            onChangeText={setMobileNumber}
+            keyboardType="phone-pad"
+            prefix="+91"
+            maxLength={10}
+          />
+
+          {/* Rider ID Input */}
+          <Input
+            label="Zepto Rider ID"
+            placeholder="ZPT-XXXXX"
+            value={riderId}
+            onChangeText={setRiderId}
+            icon={<Text style={styles.inputIcon}>🪪</Text>}
+          />
+
+          {/* Hub Selection */}
+          <Text style={styles.sectionLabel}>Operating Hub</Text>
+          <View style={styles.hubGrid}>
+            {hubs.map((hub) => (
+              <TouchableOpacity
+                key={hub.id}
+                style={[
+                  styles.hubButton,
+                  hub.selected && styles.hubButtonSelected,
+                ]}
+                onPress={() => handleHubSelect(hub.id)}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.hubIcon, hub.selected && styles.hubIconSelected]}>
+                  📍
+                </Text>
+                <Text
+                  style={[
+                    styles.hubName,
+                    hub.selected && styles.hubNameSelected,
+                  ]}
+                >
+                  {hub.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          {/* CTA Button */}
+          <View style={styles.ctaContainer}>
+            <Button
+              title="Secure My Income"
+              onPress={handleSecureIncome}
+              variant="primary"
+              size="lg"
+              icon={<Text style={styles.buttonIcon}>🛡️</Text>}
+            />
+            <Text style={styles.legalText}>
+              By tapping, you agree to our{' '}
+              <Text style={styles.legalLink}>Privacy Policy</Text> and{' '}
+              <Text style={styles.legalLink}>Insurance Terms</Text>.{'\n'}
+              GigShield is a registered partner of Zepto Logistics.
+            </Text>
+          </View>
+        </View>
+
+        {/* Footer Gradient */}
+        <View style={styles.footerGradient} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: 'center',
+    backgroundColor: colors.surface,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
+  hero: {
+    height: 397,
+    position: 'relative',
   },
-  input: {
+  heroImageContainer: {
+    ...StyleSheet.absoluteFillObject,
+    overflow: 'hidden',
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
+  },
+  heroOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'transparent',
+  },
+  heroGradient: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: colors['surface-container'],
+    borderBottomLeftRadius: borderRadius.lg,
+    borderBottomRightRadius: borderRadius.lg,
+  },
+  brandShield: {
+    position: 'absolute',
+    top: 48,
+    left: spacing[6],
+    zIndex: 10,
+  },
+  shieldContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing[2],
+    backgroundColor: 'rgba(104, 29, 247, 0.1)',
+    paddingHorizontal: spacing[4],
+    paddingVertical: spacing[2],
+    borderRadius: borderRadius.full,
     borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
+    borderColor: colors['outline-variant'],
+    opacity: 0.15,
   },
-  subtitle: {
+  shieldIcon: {
     fontSize: 18,
-    marginBottom: 10,
+  },
+  brandText: {
+    fontFamily: typography.fonts.headline,
+    fontWeight: typography.weights.bold,
+    color: colors['on-primary'],
+    letterSpacing: typography.letterSpacing.tight,
+  },
+  heroText: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: spacing[6],
+    zIndex: 10,
+  },
+  heroTitle: {
+    fontFamily: typography.fonts.headline,
+    fontSize: 56,
+    fontWeight: typography.weights.extrabold,
+    lineHeight: 62,
+    color: colors['on-surface'],
+    letterSpacing: typography.letterSpacing.tight,
+  },
+  heroSubtitle: {
+    fontFamily: typography.fonts.body,
+    fontSize: typography.sizes['body-lg'],
+    color: colors['on-surface-variant'],
+    marginTop: spacing[4],
+    lineHeight: 24,
+    maxWidth: '80%',
+  },
+  form: {
+    paddingHorizontal: spacing[6],
+    paddingVertical: spacing[4],
+    flex: 1,
+  },
+  sectionLabel: {
+    fontFamily: typography.fonts.label,
+    fontSize: typography.sizes['label-sm'],
+    fontWeight: typography.weights.bold,
+    textTransform: 'uppercase',
+    letterSpacing: typography.letterSpacing.widest,
+    color: colors.outline,
+    marginLeft: spacing[2],
+    marginBottom: spacing[3],
+  },
+  hubGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing[3],
+    marginBottom: spacing[6],
   },
   hubButton: {
-    padding: 10,
+    width: '47%',
+    height: 96,
+    backgroundColor: colors['surface-container-low'],
+    borderRadius: borderRadius.md,
+    padding: spacing[4],
+    justifyContent: 'space-between',
     borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 5,
-    borderRadius: 5,
+    borderColor: 'transparent',
   },
   hubButtonSelected: {
-    backgroundColor: '#eee',
+    backgroundColor: colors['surface-container-highest'],
+    borderColor: colors.primary,
+    opacity: 0.2,
   },
-  checkMark: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-    backgroundColor: '#007bff',
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+  hubIcon: {
+    fontSize: 24,
+    opacity: 0.6,
   },
-  checkMarkIcon: {
-    color: '#fff',
-    fontWeight: 'bold',
+  hubIconSelected: {
+    opacity: 1,
   },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 20,
+  hubName: {
+    fontFamily: typography.fonts.headline,
+    fontWeight: typography.weights.bold,
+    fontSize: typography.sizes['title-sm'],
+    color: colors['on-surface-variant'],
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
+  hubNameSelected: {
+    color: colors['on-surface'],
+  },
+  ctaContainer: {
+    marginTop: spacing[8],
+    marginBottom: spacing[12],
+  },
+  buttonIcon: {
+    fontSize: 20,
+    marginRight: spacing[2],
+  },
+  legalText: {
+    fontFamily: typography.fonts.body,
+    fontSize: typography.sizes['body-sm'],
+    color: colors.outline,
+    textAlign: 'center',
+    marginTop: spacing[6],
+    lineHeight: 20,
+  },
+  legalLink: {
+    color: colors.primary,
+    textDecorationLine: 'underline',
+  },
+  footerGradient: {
+    height: 4,
+    backgroundColor: colors.primary,
+    opacity: 0.2,
+  },
+  inputIcon: {
+    fontSize: 20,
   },
 });
-
-export default OnboardingScreen;
