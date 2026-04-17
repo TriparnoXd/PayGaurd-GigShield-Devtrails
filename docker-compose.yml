@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./gigshield-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ML_SERVICE_URL=http://ml-service:8000
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+      - ml-service
+    networks:
+      - gigshield-network
+    restart: unless-stopped
+
+  ml-service:
+    build:
+      context: ./model
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - gigshield-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - gigshield-network
+    restart: unless-stopped
+
+  mobile-web:
+    build:
+      context: ./mobile
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+    depends_on:
+      - backend
+    networks:
+      - gigshield-network
+    restart: unless-stopped
+
+networks:
+  gigshield-network:
+    driver: bridge
+
+volumes:
+  redis-data:
