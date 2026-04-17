@@ -1,8 +1,7 @@
 services:
   - type: web
     name: payguard-backend
-    runtime: docker
-    dockerfilePath: ./gigshield-backend/Dockerfile
+    image: ghcr.io/triparnoxd/gigshield-backend:latest
     port: 3000
     envVars:
       - key: NODE_ENV
