@@ -9,9 +9,9 @@ services:
       - key: PORT
         value: "3000"
       - key: RAZORPAY_KEY_ID
-        value: rzp_test_SeBqPSxLw5Aqz4
+        sync: false
       - key: RAZORPAY_KEY_SECRET
-        value: 8yoAgFKLalSU0o7vqKbsdVs4
+        sync: false
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
