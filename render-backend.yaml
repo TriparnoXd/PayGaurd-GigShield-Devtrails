@@ -1,26 +1,19 @@
 services:
   - type: web
     name: payguard-backend
-    image: ghcr.io/triparnoxd/gigshield-backend:latest
-    port: 3000
+    runtime: image
+    image:
+      url: ghcr.io/triparnoxd/gigshield-backend:latest
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: "3000"
       - key: RAZORPAY_KEY_ID
-        fromService:
-          type: env
-          name: RAZORPAY_KEY_ID
+        sync: false
       - key: RAZORPAY_KEY_SECRET
-        fromService:
-          type: env
-          name: RAZORPAY_KEY_SECRET
+        sync: false
       - key: SUPABASE_URL
-        fromService:
-          type: env
-          name: SUPABASE_URL
+        sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
-        fromService:
-          type: env
-          name: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
