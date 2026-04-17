@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: payguard-backend
+    runtime: docker
+    dockerfilePath: ./gigshield-backend/Dockerfile
+    port: 3000
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: RAZORPAY_KEY_ID
+        fromService:
+          type: env
+          name: RAZORPAY_KEY_ID
+      - key: RAZORPAY_KEY_SECRET
+        fromService:
+          type: env
+          name: RAZORPAY_KEY_SECRET
+      - key: SUPABASE_URL
+        fromService:
+          type: env
+          name: SUPABASE_URL
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        fromService:
+          type: env
+          name: SUPABASE_SERVICE_ROLE_KEY
