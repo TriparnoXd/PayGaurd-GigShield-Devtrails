@@ -1,28 +1,40 @@
 services:
   - type: web
-    name: payguard-backend
-    image: ghcr.io/triparnoxd/gigshield-backend:latest
+    name: backend
+    runtime: docker
+    dockerContext: ./gigshield-backend
+    dockerfilePath: Dockerfile
     port: 3000
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: "3000"
+      - key: ML_SERVICE_URL
+        value: http://ml-service:8000
+      - key: REDIS_ENABLED
+        value: "false"
       - key: RAZORPAY_KEY_ID
-        value: rzp_test_SeBqPSxLw5Aqz4
+        sync: false
       - key: RAZORPAY_KEY_SECRET
-        value: 8yoAgFKLalSU0o7vqKbsdVs4
+        sync: false
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
         sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
 
   - type: web
-    name: payguard-ml-service
-    image: ghcr.io/triparnoxd/gigshield-ml:latest
+    name: ml-service
+    runtime: docker
+    dockerContext: ./model
+    dockerfilePath: Dockerfile
     port: 8000
 
   - type: web
-    name: payguard-mobile-web
-    image: ghcr.io/triparnoxd/gigshield-mobile:latest
+    name: mobile-web
+    runtime: docker
+    dockerContext: ./mobile
+    dockerfilePath: Dockerfile
     port: 80
