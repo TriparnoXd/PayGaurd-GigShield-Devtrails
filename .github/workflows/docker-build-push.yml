@@ -9,6 +9,21 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        include:
+          - service: backend
+            context: ./gigshield-backend
+            image_name: gigshield-backend
+          - service: ml
+            context: ./model
+            image_name: gigshield-ml
+          - service: mobile
+            context: ./mobile
+            image_name: gigshield-mobile
 
     steps:
       - name: Checkout code
@@ -21,9 +36,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Lowercase repository owner
+        id: repo_owner
+        run: echo "owner=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ${{ matrix.context }}
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/paygaurd-gigshield-devtrails:latest
+          tags: ghcr.io/${{ steps.repo_owner.outputs.owner }}/${{ matrix.image_name }}:latest
