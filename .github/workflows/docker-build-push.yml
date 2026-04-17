@@ -1,14 +1,12 @@
-name: Build and Push Docker Images (DISABLED)
+name: CI CD Disabled
 
 on:
   push:
     branches:
       - main
-      - develop
 
 jobs:
   disabled:
     runs-on: ubuntu-latest
     steps:
-      - name: Skipping CI/CD - Use manual push for now
-        run: echo "GitHub Actions CI/CD disabled. Use: docker build && docker push manually."
+      - run: echo "Using manual Docker push"
