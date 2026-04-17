@@ -3,7 +3,7 @@ services:
     name: backend
     runtime: docker
     dockerContext: ./gigshield-backend
-    dockerfilePath: Dockerfile
+    dockerfilePath: ./gigshield-backend/Dockerfile
     envVars:
       - key: NODE_ENV
         value: production
@@ -36,10 +36,10 @@ services:
     name: ml-service
     runtime: docker
     dockerContext: ./model
-    dockerfilePath: Dockerfile
+    dockerfilePath: ./model/Dockerfile
 
   - type: web
     name: mobile-web
     runtime: docker
     dockerContext: ./mobile
-    dockerfilePath: Dockerfile
+    dockerfilePath: ./mobile/Dockerfile
