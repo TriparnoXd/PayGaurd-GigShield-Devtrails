@@ -4,7 +4,6 @@ services:
     runtime: docker
     dockerContext: ./gigshield-backend
     dockerfilePath: Dockerfile
-    port: 3000
     envVars:
       - key: NODE_ENV
         value: production
@@ -38,11 +37,9 @@ services:
     runtime: docker
     dockerContext: ./model
     dockerfilePath: Dockerfile
-    port: 8000
 
   - type: web
     name: mobile-web
     runtime: docker
     dockerContext: ./mobile
     dockerfilePath: Dockerfile
-    port: 80
