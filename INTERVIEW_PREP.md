@@ -39,10 +39,23 @@ Traditional insurance requires manual filing. GigShield uses **Parametric Insura
 ## 🤖 3. Artificial Intelligence & Machine Learning
 
 ### A. Dynamic Premium Model
-*   **Model:** XGBoost (Gradient Boosted Trees).
+*   **Model:** Gradient Boosting Regressor (specifically `sklearn.ensemble.GradientBoostingRegressor`).
 *   **Objective:** Predict a fair weekly premium based on risk.
 *   **Features:** Zone risk score (top feature), historical weather patterns, worker activity hours, and claim history.
 *   **Explainability:** Uses **SHAP (SHapley Additive exPlanations)** to show which factors influenced the premium calculation.
+
+#### 🧠 Deep Dive: How Gradient Boosting Works
+If asked about XGBoost/Gradient Boosting, you should explain:
+1.  **Ensemble Learning:** It's an ensemble technique that combines many "weak learners" (simple decision trees) to create a "strong learner."
+2.  **Boosting Mechanism:** Unlike Random Forest (which builds trees in parallel), Boosting builds trees **sequentially**. Each new tree tries to correct the errors (residuals) made by the previous trees.
+3.  **Loss Optimization:** It uses Gradient Descent to minimize a loss function (like Mean Squared Error for our premiums).
+4.  **Key Hyperparameters in our code:**
+    *   `n_estimators=800`: We use 800 sequential trees to capture complex patterns.
+    *   `learning_rate=0.03`: A small step size (shrinkage) to prevent overfitting.
+    *   `max_depth=4`: Each tree is kept relatively shallow to ensure they remain "weak learners" and generalize well.
+    *   `subsample=0.85`: We use 85% of the data for each tree, which adds stochasticity and prevents overfitting.
+
+> **Note:** While often referred to as "XGBoost" in conversation, our current implementation uses Scikit-Learn's `GradientBoostingRegressor`. XGBoost is a specific, highly optimized library that implements the same algorithm but with better performance and handling of missing data.
 
 ### B. Fraud Detection Engine
 *   **Model:** Isolation Forest (Anomaly Detection) + Rule-based logic.
